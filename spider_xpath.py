@@ -2,7 +2,7 @@
 """
 Created on Thu Oct 19 21:34:59 2017
 
-@author: Pu Yuan / 袁普
+@author: Dendi
 @descripion: 此爬虫使用Xpath扒取百度贴吧帖子中楼主的楼层，
              每楼扒取正文以及楼主的发帖时间。
 """
