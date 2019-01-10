@@ -1,14 +1,13 @@
 #-*-coding:utf-8-*-
 #---------------------------
-#Ê±¼ä£º2016.3.11
-#×÷Õß£º13ĞÅ¹¤·½³¬
-#ÓïÑÔ£ºpython2.7
-#°æ±¾£ºBUG°æ1.2
-#¹¦ÄÜ£ºÄ£ÄâµÇÂ¼½ÌÎñ´¦ÍøÕ¾£¬¼ÆËã¼ÓÈ¨³É¼¨
-#Ê¹ÓÃ·½·¨£º
-#    1£ºÔËĞĞ³ÌĞò£¬ÔÚdÅÌÏÂ»áÉú³ÉÒ»¸öÑéÖ¤ÂëÍ¼Æ¬
-#    2£ºÔÚ¿ØÖÆÌ¨ÊäÈëÑ§ºÅÃÜÂëÑéÖ¤Âëºó»Ø³µ£¬¼´¿É½øÈë½ÌÎñÏµÍ³£¡
-#!!!×¢Òâ£¬ËÄ¼¶³É¼¨¿Î³ÌºÅÈç¹ûÎªNULL£¬Ôò½á¹û²»×¼È·£¡
+#æ—¶é—´ï¼š2016.3.11
+#ä½œè€…ï¼šDendiom
+#è¯­è¨€ï¼špython2.7
+#åŠŸèƒ½ï¼šæ¨¡æ‹Ÿç™»å½•æ•™åŠ¡å¤„ç½‘ç«™ï¼Œè®¡ç®—åŠ æƒæˆç»©
+#ä½¿ç”¨æ–¹æ³•ï¼š
+#    1ï¼šè¿è¡Œç¨‹åºï¼Œåœ¨dç›˜ä¸‹ä¼šç”Ÿæˆä¸€ä¸ªéªŒè¯ç å›¾ç‰‡
+#    2ï¼šåœ¨æ§åˆ¶å°è¾“å…¥å­¦å·å¯†ç éªŒè¯ç åå›è½¦ï¼Œå³å¯è¿›å…¥æ•™åŠ¡ç³»ç»Ÿï¼
+#!!!æ³¨æ„ï¼Œå››çº§æˆç»©è¯¾ç¨‹å·å¦‚æœä¸ºNULLï¼Œåˆ™ç»“æœä¸å‡†ç¡®ï¼
 #---------------------------
 
 
@@ -19,32 +18,32 @@ import re
 
 
 
-#½ÌÎñµÇÂ¼POSTµÄµØÖ·
+#æ•™åŠ¡ç™»å½•POSTçš„åœ°å€
 url = 'http://jwxt.bupt.edu.cn/jwLoginAction.do'
 
-#ÑéÖ¤ÂëµÄµØÖ·       
+#éªŒè¯ç çš„åœ°å€       
 url2 = 'http://jwxt.bupt.edu.cn/validateCodeAction.do?random='
 
-#Î±×°µÄä¯ÀÀÆ÷Í·
+#ä¼ªè£…çš„æµè§ˆå™¨å¤´
 header = {'User-Agent':'Mozilla/5.0 (Windows NT 6.3; WOW64)\
             AppleWebKit/537.36 (KHTML, like Gecko) Chrome/49.0.2623.75 Safari/537.36',
             'Referer':'http://10.3.8.211/'}
 
-#cookieÓëopener³õÊ¼»¯
+#cookieä¸openeråˆå§‹åŒ–
 cookie = cookielib.CookieJar()
 opener = urllib2.build_opener(urllib2.HTTPCookieProcessor(cookie))
 
-#»ñÈ¡ÑéÖ¤ÂëÍ¼Æ¬
+#è·å–éªŒè¯ç å›¾ç‰‡
 filename = 'd://yzm.jpg'
 pic = opener.open(url2).read()
 f = open(filename,'wb')
 f.write(pic)
 f.close()
 
-#POSTÊı¾İĞéÄâµÇÂ¼
-name = raw_input('ÇëÊäÈëÑ§ºÅ£º')
-pwd = raw_input('ÇëÊäÈëÃÜÂë£º')
-yzm = raw_input('ÇëÊäÈëÑéÖ¤Âë:')
+#POSTæ•°æ®è™šæ‹Ÿç™»å½•
+name = raw_input('è¯·è¾“å…¥å­¦å·ï¼š')
+pwd = raw_input('è¯·è¾“å…¥å¯†ç ï¼š')
+yzm = raw_input('è¯·è¾“å…¥éªŒè¯ç :')
 values = {'type':'sso',
           'zjh':name,           
           'mm':pwd,            
@@ -57,15 +56,15 @@ word1 = re.compile(temp1,re.S)
 title = re.search(word1,response)
 if title:
     #print title.group()
-    if title.group() == '<title>Ñ§·ÖÖÆ×ÛºÏ½ÌÎñ</title>':
-        print 'µÇÂ¼½ÌÎñÏµÍ³³É¹¦£¡'  
+    if title.group() == '<title>å­¦åˆ†åˆ¶ç»¼åˆæ•™åŠ¡</title>':
+        print 'ç™»å½•æ•™åŠ¡ç³»ç»ŸæˆåŠŸï¼'  
     else:
-        print 'µÇÂ¼½ÌÎñÊ§°Ü£¡'
+        print 'ç™»å½•æ•™åŠ¡å¤±è´¥ï¼'
 
-#ÅÀ³æ°ÎÈ¡Ñ§·ÖÓë³É¼¨
+#çˆ¬è™«æ‹”å–å­¦åˆ†ä¸æˆç»©
 print 'Calculating....'
-credits = []    #Ñ§·Ö
-scores = []    #³É¼¨
+credits = []    #å­¦åˆ†
+scores = []    #æˆç»©
 url3 = 'http://jwxt.bupt.edu.cn/gradeLnAllAction.do?type=ln&oper=fainfo&fajhh=723'
 result1 = opener.open(url3)
 result2 = opener.open(url3)
@@ -78,13 +77,13 @@ items = re.findall(ree,result1.read())
 credit = [items[i] for i in range(len(items)) if (i+1)%3 ==0]
 for i in range(len(credit)):
     credits.append(float(credit[i].encode('gbk')))
-print 'Ò»¹²ÓĞ¿Î³Ì',len(credits),'ÃÅ'
+print 'ä¸€å…±æœ‰è¯¾ç¨‹',len(credits),'é—¨'
  
 
 test_template2 = r'<p align="center">\s*(\d*.\d)&nbsp;\s*</P>'
 ree2 = re.compile(test_template2,re.S|re.M)
 items2 = re.findall(ree2,result2.read())
-print '»ñÈ¡µ½µÄ³É¼¨ÓĞ£º',len(items2),'¸ö'
+print 'è·å–åˆ°çš„æˆç»©æœ‰ï¼š',len(items2),'ä¸ª'
 for i in range(len(items2)):
     scores.append(float(items2[i].encode('gbk')))
 
@@ -97,7 +96,7 @@ for i in range(len(credits)):
     t = credits[i]*scores[i]
     sum2 = sum2 + t
     
-print '¼ÓÈ¨Ñ§·Ö¼¨£º',sum2/sum1
+print 'åŠ æƒå­¦åˆ†ç»©ï¼š',sum2/sum1
 
     
 
